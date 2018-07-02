@@ -1,0 +1,17 @@
+{
+  "name": "rps",
+  "version": "0.0.0",
+  "main": "src/rps.js",
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "test": "mocha --require babel-register spec/"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "latest",
+    "mocha": "latest"
+  }
+}
