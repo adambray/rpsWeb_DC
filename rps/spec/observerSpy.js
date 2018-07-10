@@ -1,4 +1,4 @@
-export class ObserverSpy {
+export class UiObserverSpy {
     constructor() {
         this.p1WinsWasCalled = false;
         this.p2WinsWasCalled = false;
