@@ -23,19 +23,19 @@ describe('RPS History', () => {
     rps = new RPS(new InMemoryRoundRepo());
   });
 
-  it('tells the history observer that there are no rounds if no rounds have been played', () => {
-    rps.history(historyObserver);
+  it('tells the history observer that there are no rounds if no rounds have been played', async () => {
+    await rps.history(historyObserver);
 
     expect(historyObserver.noRounds).to.have.been.called;
   });
 
-  it('tells the history observer what rounds are in the history if rounds have been played', () => {
-    rps.playRound("ROCK", "PAPER", uiObserver);
-    rps.playRound("ROCK", "SCISSORS", uiObserver);
-    rps.playRound("ROCK", "ROCK", uiObserver);
-    rps.playRound("ROCK", "SAILBOAT", uiObserver);
+  it('tells the history observer what rounds are in the history if rounds have been played', async () => {
+    await rps.playRound("ROCK", "PAPER", uiObserver);
+    await rps.playRound("ROCK", "SCISSORS", uiObserver);
+    await rps.playRound("ROCK", "ROCK", uiObserver);
+    await rps.playRound("ROCK", "SAILBOAT", uiObserver);
 
-    rps.history(historyObserver);
+    await rps.history(historyObserver);
 
     const expectedRounds = [
       new Round("ROCK", "PAPER", 'p2'),

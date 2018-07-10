@@ -9,37 +9,37 @@ export class RPS {
     this.repo = repo;
   }
 
-  playRound(p1Throw, p2Throw, ui) {
+  async playRound(p1Throw, p2Throw, ui) {
     const rules = new Rules(p1Throw, p2Throw);
 
     if (rules.p1Invalid || rules.p2Invalid) {
-      this.recordResult(p1Throw, p2Throw, 'invalid');
       ui.invalid();
+      await this.recordResult(p1Throw, p2Throw, 'invalid');
       return;
     }
 
     if (rules.tie) {
-      this.recordResult(p1Throw, p2Throw, 'tie');
       ui.tie();
+      await this.recordResult(p1Throw, p2Throw, 'tie');
     } else if (rules.p1Wins) {
-      this.recordResult(p1Throw, p2Throw, 'p1');
       ui.p1Wins();
+      await this.recordResult(p1Throw, p2Throw, 'p1');
     } else {
-      this.recordResult(p1Throw, p2Throw, 'p2');
       ui.p2Wins();
+      await this.recordResult(p1Throw, p2Throw, 'p2');
     }
   }
 
-  history(observer) {
-    if (this.repo.empty) {
+  async history(observer) {
+    if (await this.repo.isEmpty()) {
       observer.noRounds();
     } else {
-      observer.rounds(this.repo.getAll());
+      observer.rounds(await this.repo.getAll());
     }
   }
 
-  recordResult(p1Throw, p2Throw, result) {
-    this.repo.save(new Round(p1Throw, p2Throw, result));
+  async recordResult(p1Throw, p2Throw, result) {
+    await this.repo.save(new Round(p1Throw, p2Throw, result));
   }
 }
 

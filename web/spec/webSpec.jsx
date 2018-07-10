@@ -100,12 +100,17 @@ describe('play form', function () {
       expectPageToContain("Player 1: ROCK, Player 2: SAILBOAT, Result: Invalid");
     });
 
-    it('asks for history after a round result has been given', () => {
+    it('asks for history after a round result has been given', (done) => {
       renderApp(new RPS(new InMemoryRoundRepo()));
 
       expectPageToNotContain("Player 1:");
-      play("ROCK", "PAPER")
-      expectPageToContain("Player 1: ROCK, Player 2: PAPER, Result: Player 2 Wins");
+
+      play("ROCK", "PAPER");
+
+      setTimeout(() => {
+        expectPageToContain("Player 1: ROCK, Player 2: PAPER, Result: Player 2 Wins");
+        done();
+      }, 50);
     });
   });
 

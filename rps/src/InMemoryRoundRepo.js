@@ -1,19 +1,25 @@
 class InMemoryRoundRepo {
 
-  constructor() {
+  constructor(delay) {
     this.rounds = [];
+    this.delay = delay ? 0 :delay
   }
 
-  save(round) {
+  async save(round) {
     this.rounds.push(round);
+    return new Promise(resolve => {
+      setTimeout(() => resolve(), this.delay);
+    });
   }
 
-  getAll() {
-    return this.rounds;
+  async getAll() {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(this.rounds), this.delay)
+    });
   }
 
-  get empty() {
-    return this.rounds.length === 0;
+   async isEmpty() {
+    return Promise.resolve(this.rounds.length === 0);
   }
 }
 

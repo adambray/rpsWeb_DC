@@ -16,8 +16,8 @@ export class RPSApp extends React.Component {
     this.props.usecases.history(this);
   }
 
-  playGame() {
-    this.props.usecases.playRound(this.state.p1Throw, this.state.p2Throw, this);
+  async playGame() {
+    await this.props.usecases.playRound(this.state.p1Throw, this.state.p2Throw, this);
     this.props.usecases.history(this);
   }
 

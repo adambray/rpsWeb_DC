@@ -10,6 +10,6 @@ document.querySelector('body').appendChild(domFixture);
 
 
 ReactDOM.render(
-  <RPSApp usecases={new RPS(new InMemoryRoundRepo())}/>,
+  <RPSApp usecases={new RPS(new InMemoryRoundRepo(300))}/>,
   domFixture
 );

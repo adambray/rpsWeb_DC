@@ -9,6 +9,7 @@
     "test": "mocha --require babel-register spec/"
   },
   "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chai": "latest",
