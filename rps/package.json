@@ -13,5 +13,8 @@
     "babel-register": "^6.26.0",
     "chai": "latest",
     "mocha": "latest"
+  },
+  "dependencies": {
+    "sinon-chai": "^3.3.0"
   }
 }
