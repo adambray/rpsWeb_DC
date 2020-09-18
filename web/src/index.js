@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import {RPSApp} from "./RPSApp";
+import RPSApp from "./RPSAppFunctional";
 import {RPS} from "rps";
 
 const domFixture = document.createElement('div');

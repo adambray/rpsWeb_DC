@@ -7,44 +7,43 @@ export class RPSApp extends React.Component {
       resultText: "",
     };
 
-    this.updateThrow = this.updateThrow.bind(this);
+    this.resultObserver = new ResultObserver(this.setState.bind(this));
   }
 
   playGame() {
-    this.props.usecases.playRps(this.state.p1Throw, this.state.p2Throw, this);
-  }
-
-  updateThrow(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    this.props.usecases.playRps(null, null, this.resultObserver);
   }
 
   render() {
     return (
       <div>
       <h1>Make decisions here:</h1>
-        <input id="p1Throw" name="p1Throw" value={this.state.p1Throw} onChange={this.updateThrow}/>
-        <input id="p2Throw" name="p2Throw" value={this.state.p2Throw} onChange={this.updateThrow}/>
         <button id="playButton" onClick={() => this.playGame()}>Play!</button>
         <span>{this.state.resultText}</span>
       </div>
     );
   }
+}
+
+class ResultObserver {
+
+  constructor(setStateFn) {
+    this.setStateFn = setStateFn;
+  }
 
   p1Wins() {
-    this.setState({resultText: "Player 1 Wins!",});
+    this.setStateFn({resultText: "Player 1 Wins!"});
   }
 
   p2Wins() {
-    this.setState({resultText: "Player 2 Wins!"});
+    this.setStateFn({resultText: "Player 2 Wins!"});
   }
 
   tie() {
-    this.setState({resultText: "Tie!"});
+    this.setStateFn({resultText: "Tie!"});
   }
 
   invalid() {
-    this.setState({resultText: "Invalid Input"});
+    this.setStateFn({resultText: "Invalid Input"});
   }
 }

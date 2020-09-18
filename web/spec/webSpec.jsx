@@ -2,8 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 import * as ReactDOM from "react-dom";
-import {RPSApp} from "../src/RPSApp";
-import * as sinon from "sinon";
+import RPSApp from "../src/RPSAppFunctional";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -16,7 +15,7 @@ describe('play form', function () {
 
   it('should display "Player 2 Wins!" to the user when the user clicks play and the usecase says p2 wins', () => {
     renderApp({
-      playRps: (p1, p2, observer) => observer.p2Wins()
+      playRps: (p1, p2, observer) => observer.p2Wins(),
     });
 
     expectPageToNotContain("Player 2 Wins!");
@@ -31,7 +30,7 @@ describe('play form', function () {
 
     expectPageToNotContain("Player 1 Wins!");
     play();
-    expect(document.body.innerText).to.contain("Player 1 Wins!");
+    expectPageToContain("Player 1 Wins!");
   });
 
   it('should display "Tie!" to the user when the user clicks play and the usecase says tie', () => {
@@ -54,23 +53,17 @@ describe('play form', function () {
     expectPageToContain("Invalid Input");
   });
 
-  it('should pass the inputs to the rps usecase', function () {
-    const playSpy = {playRps: sinon.spy()};
-    renderApp(playSpy);
+  it('should pass the correct user input to the playRps method', () => {
 
-    play("ROCK", "PAPER");
-
-    expect(playSpy.playRps).to.have.been.calledWith("ROCK", "PAPER");
   });
 
   function play(p1, p2) {
-    setInputValue("p1Throw", p1);
-    setInputValue("p2Throw", p2);
-    document.querySelector('#playButton').click();
+    // fill in inputs
+    document.querySelector('button').click();
   }
 
-  function setInputValue(id, value) {
-    const input = document.getElementById(id);
+  function setInputValue(elementId, value) {
+    const input = document.getElementById(elementId);
     const lastValue = input.value;
 
     input.value = value;
